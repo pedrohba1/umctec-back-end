@@ -27,8 +27,8 @@ Keep in mind that the `DB_NAME` will be the same as `DB_USER` if you don't speci
 ## Roadmap <a name = "roadmap"></a>
 
 1. make the endpoints and all code related to storing and fetching them from the database:
-- [ ] POST - Create activity
-- [ ] GET - List activities
+- [X] POST - Create activity
+- [X] GET - List activities
 - [ ] POST - Create card
 - [ ] GET - List cards
 
