@@ -4,6 +4,8 @@
 
 - [About](#about)
 - [Setup](#getting_started)
+- [Roadmap](#roadmap)
+
 
 ## 🧐 About <a name = "about"></a>
 
@@ -21,6 +23,22 @@ docker run --name umctec -e  POSTGRES_USER=umctec -e POSTGRES_PASSWORD=admin -p 
 After that, copy the contents of `.env.development` into `.env` and run the migrations with: `yarn sequelize db:migrate`.
 
 Keep in mind that the `DB_NAME` will be the same as `DB_USER` if you don't specify it in container creation command above.
+
+## Roadmap <a name = "roadmap"></a>
+
+1. make the endpoints and all code related to storing and fetching them from the database:
+- [ ] POST - Create activity
+- [ ] GET - List activities
+- [ ] POST - Create card
+- [ ] GET - List cards
+
+2. Implement bonuses:
+- [ ] Swagger
+- [ ] Unit tests
+- [ ] Integration tests
+- [ ] Host REST Api in a server
+
+
 
 
 
