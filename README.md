@@ -29,7 +29,7 @@ Keep in mind that the `DB_NAME` will be the same as `DB_USER` if you don't speci
 1. make the endpoints and all code related to storing and fetching them from the database:
 - [X] POST - Create activity
 - [X] GET - List activities
-- [ ] Seed activities via Sequelize.
+- [X] Seed activities via Sequelize.
 - [ ] POST - Create card
 - [ ] GET - List cards
 - [ ] Seed Cards via Sequelize.
