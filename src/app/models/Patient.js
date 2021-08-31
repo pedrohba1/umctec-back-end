@@ -10,10 +10,6 @@ class Patient extends Model {
         );
         return this;
     }
-
-    static associate(models) {
-        this.hasOne(models.Card, { foreignKey: 'patient_id' });
-    }
 }
 
 export default Patient;

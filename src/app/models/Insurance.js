@@ -10,10 +10,6 @@ class Insurance extends Model {
         );
         return this;
     }
-
-    static associate(models) {
-        this.hasOne(models.Card, { foreignKey: 'insurance_id' });
-    }
 }
 
 export default Insurance;

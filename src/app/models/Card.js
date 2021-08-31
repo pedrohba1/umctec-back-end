@@ -27,6 +27,11 @@ class Card extends Model {
         );
         return this;
     }
+
+    static associate(models) {
+        this.belongsTo(models.Insurance, { foreignKey: 'insurance_id' });
+        this.belongsTo(models.Patient, { foreignKey: 'patient_id' });
+    }
 }
 
 export default Card;
