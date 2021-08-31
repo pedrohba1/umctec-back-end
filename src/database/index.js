@@ -3,8 +3,12 @@ import Sequelize from 'sequelize';
 import databaseConfig from '../config/database';
 
 import Activity from '../app/models/Activity';
+import Insurance from '../app/models/Insurance';
+import Patient from '../app/models/Patient';
+import Card from '../app/models/Card';
+import CardSummary from '../app/models/CardSummary';
 
-const models = [Activity];
+const models = [Activity, Insurance, Patient, Card, CardSummary];
 
 class Database {
     constructor() {
