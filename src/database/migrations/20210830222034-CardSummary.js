@@ -5,6 +5,24 @@ module.exports = {
             totalCardsOk: Sequelize.INTEGER,
             totalCardsWarning: Sequelize.INTEGER,
             totalCardsDelayed: Sequelize.INTEGER,
+            activityId: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'activities',
+                    key: 'id',
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'SET NULL',
+                allowNull: true,
+            },
+            created_at: {
+                type: Sequelize.DATE,
+                allowNull: false,
+            },
+            updated_at: {
+                type: Sequelize.DATE,
+                allowNull: false,
+            },
         });
     },
 
