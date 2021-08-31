@@ -52,7 +52,7 @@ module.exports = {
             },
             number_of_pendencies: Sequelize.INTEGER,
             number_of_open_pendencies: Sequelize.INTEGER,
-            number_of_documens: Sequelize.INTEGER,
+            number_of_documents: Sequelize.INTEGER,
             number_of_not_recieved_documents: Sequelize.INTEGER,
             number_of_checklist_items: Sequelize.INTEGER,
             number_of_done_checklist_items: Sequelize.INTEGER,
