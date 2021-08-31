@@ -2,10 +2,10 @@ module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.createTable('cards_summary', {
             id: Sequelize.INTEGER,
-            totalCardsOk: Sequelize.INTEGER,
-            totalCardsWarning: Sequelize.INTEGER,
-            totalCardsDelayed: Sequelize.INTEGER,
-            activityId: {
+            total_cards_ok: Sequelize.INTEGER,
+            total_cards_warning: Sequelize.INTEGER,
+            total_cards_delayed: Sequelize.INTEGER,
+            activity_id: {
                 type: Sequelize.INTEGER,
                 references: {
                     model: 'activities',

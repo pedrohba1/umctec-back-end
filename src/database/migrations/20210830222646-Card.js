@@ -7,7 +7,7 @@ module.exports = {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            activityId: {
+            activity_id: {
                 type: Sequelize.INTEGER,
                 references: {
                     model: 'activities',
@@ -18,7 +18,7 @@ module.exports = {
                 allowNull: true,
             },
             // TODO: slaStatus will be a virtual field
-            patientId: {
+            patient_id: {
                 type: Sequelize.INTEGER,
                 references: {
                     model: 'patients',
@@ -28,7 +28,7 @@ module.exports = {
                 onDelete: 'SET NULL',
                 allowNull: true,
             },
-            insuranceId: {
+            insurance_id: {
                 type: Sequelize.INTEGER,
                 references: {
                     model: 'insurances',
@@ -38,24 +38,24 @@ module.exports = {
                 onDelete: 'SET NULL',
                 allowNull: true,
             },
-            visityId: {
+            visity_id: {
                 type: Sequelize.STRING,
             },
-            billId: {
+            bill_id: {
                 type: Sequelize.STRING,
             },
-            billType: {
+            bill_type: {
                 type: Sequelize.ENUM('HOSPITALAR', 'AMBULATORIAL'),
             },
-            totalAmount: {
+            total_amount: {
                 type: Sequelize.FLOAT,
             },
-            numberOfPendencies: Sequelize.INTEGER,
-            numberOfOpenPendencies: Sequelize.INTEGER,
-            numberOfDocuments: Sequelize.INTEGER,
-            numberOfNotReceivedDocuments: Sequelize.INTEGER,
-            numberOfChecklistItem: Sequelize.INTEGER,
-            numberOfDoneChecklistItem: Sequelize.INTEGER,
+            number_of_pendencies: Sequelize.INTEGER,
+            number_of_open_pendencies: Sequelize.INTEGER,
+            number_of_documens: Sequelize.INTEGER,
+            number_of_not_recieved_documents: Sequelize.INTEGER,
+            number_of_checklist_items: Sequelize.INTEGER,
+            number_of_done_checklist_items: Sequelize.INTEGER,
             // pageInfo will be a virtual field
             created_at: {
                 type: Sequelize.DATE,
