@@ -12,6 +12,13 @@ class Activity extends Model {
         );
         return this;
     }
+
+    static associate(models) {
+        this.hasMany(models.Card, {
+            foreignKey: 'activityId',
+        });
+        this.hasOne(models.CardSummary);
+    }
 }
 
 export default Activity;

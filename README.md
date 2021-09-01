@@ -30,8 +30,8 @@ Keep in mind that the `DB_NAME` will be the same as `DB_USER` if you don't speci
 - [X] POST - Create activity
 - [X] GET - List activities
 - [X] Seed activities via Sequelize.
-- [ ] POST - Create card
-- [ ] GET - List cards
+- [X] POST - Create card
+- [X] GET - List cards
 - [ ] Seed Cards via Sequelize.
 
 2. Implement bonuses:
