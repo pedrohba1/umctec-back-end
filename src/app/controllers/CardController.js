@@ -59,6 +59,7 @@ class CardController {
 
         const cards = await Card.findAll({
             offset: (page - 1) * perPage,
+            limit: perPage,
             attributes: {
                 exclude: ['patient_id', 'insurance_id'],
             },
