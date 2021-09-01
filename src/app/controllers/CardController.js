@@ -48,8 +48,16 @@ class CardController {
 
     async index(req, res) {
         const { activityId } = req.params;
+        const {
+            priority,
+            toRecieve,
+            toSend,
+            page = 1,
+            perPage = 12,
+        } = req.query;
 
         const cards = await Card.findAll({
+            offset: (page - 1) * perPage,
             attributes: {
                 exclude: ['patient_id', 'insurance_id'],
             },
@@ -70,6 +78,7 @@ class CardController {
 
         const activity = await Activity.findByPk(activityId);
         const { sla } = activity;
+
         const parsedCards = cards.map(card => {
             let status;
             const { daysSinceCreated } = card;
@@ -80,7 +89,14 @@ class CardController {
             card.dataValues.slaStatus = status;
             return card;
         });
-        return res.json({ cards: parsedCards });
+
+        return res.json({
+            cards: parsedCards,
+            pageInfo: {
+                page,
+                perPage,
+            },
+        });
     }
 }
 
