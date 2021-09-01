@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import Activity from './app/controllers/ActivityController';
 import Card from './app/controllers/CardController';
+import Summary from './app/controllers/SummaryController';
 
 const routes = new Router();
 
@@ -12,5 +13,7 @@ routes.get('/activities', Activity.index);
 
 routes.post('/cards', Card.store);
 routes.get('/cards/:activityId', Card.index);
+
+routes.get('/summary/:activityId', Summary.show);
 
 export default routes;
