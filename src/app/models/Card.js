@@ -1,4 +1,5 @@
-import Sequelize, { Model } from 'sequelize';
+import Sequelize, { Model, DataTypes } from 'sequelize';
+import daysBetween from '../utils/daysBetween';
 
 class Card extends Model {
     static init(sequelize) {
@@ -12,6 +13,12 @@ class Card extends Model {
                 },
                 bill_type: {
                     type: Sequelize.ENUM('HOSPITALAR', 'AMBULATORIAL'),
+                },
+                daysSinceCreated: {
+                    type: DataTypes.VIRTUAL,
+                    get() {
+                        return daysBetween(this.get('createdAt'), new Date());
+                    },
                 },
                 total_amount: {
                     type: Sequelize.FLOAT,
