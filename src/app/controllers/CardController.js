@@ -3,7 +3,7 @@ import Patient from '../models/Patient';
 import Insurance from '../models/Insurance';
 
 import Card from '../models/Card';
-// import Activity from '../models/Activity';
+import Activity from '../models/Activity';
 
 class CardController {
     async store(req, res) {
@@ -50,8 +50,6 @@ class CardController {
         const { activityId } = req.params;
 
         const cards = await Card.findAll({
-            raw: true,
-            nest: true,
             attributes: {
                 exclude: ['patient_id', 'insurance_id'],
             },
@@ -70,13 +68,19 @@ class CardController {
             ],
         });
 
-        // TODO: aplicar lógica do slaStatus
-        /*   
-        const activity = await Activity.findByPk(activityId); 
+        const activity = await Activity.findByPk(activityId);
+        const { sla } = activity;
         const parsedCards = cards.map(card => {
-            const date = card.createdAt;
-        }); */
-        return res.json({ cards });
+            let status;
+            const { daysSinceCreated } = card;
+            const percentage = daysSinceCreated * (sla / 100);
+            if (percentage <= 0.75) status = 'OK';
+            else if (percentage > 0.75 && percentage <= 1) status = 'WARNING';
+            else if (percentage > 1) status = 'DELAYED';
+            card.dataValues.slaStatus = status;
+            return card;
+        });
+        return res.json({ cards: parsedCards });
     }
 }
 
