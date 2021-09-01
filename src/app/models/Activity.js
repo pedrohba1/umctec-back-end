@@ -14,7 +14,9 @@ class Activity extends Model {
     }
 
     static associate(models) {
-        this.hasMany(models.Card, { foreignKey: 'activity_id' });
+        this.hasMany(models.Card, {
+            foreignKey: 'activityId',
+        });
         this.hasOne(models.CardSummary);
     }
 }

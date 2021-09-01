@@ -59,11 +59,11 @@ class Card extends Model {
 
     static associate(models) {
         this.belongsTo(models.Insurance, {
-            foreignKey: 'insurance_id',
+            foreignKey: 'insuranceId',
             as: 'insurance',
         });
         this.belongsTo(models.Patient, {
-            foreignKey: 'patient_id',
+            foreignKey: 'patientId',
             as: 'patient',
         });
     }
