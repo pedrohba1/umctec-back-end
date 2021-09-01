@@ -23,8 +23,9 @@ class Card extends Model {
                         return daysBetween(this.get('createdAt'), new Date());
                     },
                 },
-                total_amount: {
+                totalAmount: {
                     type: Sequelize.FLOAT,
+                    field: 'total_amount',
                 },
                 numberOfPendencies: {
                     type: Sequelize.INTEGER,
@@ -38,9 +39,9 @@ class Card extends Model {
                     type: Sequelize.INTEGER,
                     field: 'number_of_documents',
                 },
-                numberOfNotRecievedDocuments: {
+                numberOfNotReceivedDocuments: {
                     type: Sequelize.INTEGER,
-                    field: 'number_of_not_recieved_documents',
+                    field: 'number_of_not_received_documents',
                 },
                 numberOfChecklistItems: {
                     type: Sequelize.INTEGER,
@@ -58,11 +59,11 @@ class Card extends Model {
 
     static associate(models) {
         this.belongsTo(models.Insurance, {
-            foreignKey: 'insurance_id',
+            foreignKey: 'insuranceId',
             as: 'insurance',
         });
         this.belongsTo(models.Patient, {
-            foreignKey: 'patient_id',
+            foreignKey: 'patientId',
             as: 'patient',
         });
     }

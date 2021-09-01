@@ -15,7 +15,7 @@ module.exports = {
                 },
                 onUpdate: 'CASCADE',
                 onDelete: 'SET NULL',
-                allowNull: true,
+                allowNull: false,
             },
             // TODO: slaStatus will be a virtual field
             patient_id: {
@@ -26,7 +26,7 @@ module.exports = {
                 },
                 onUpdate: 'CASCADE',
                 onDelete: 'SET NULL',
-                allowNull: true,
+                allowNull: false,
             },
             insurance_id: {
                 type: Sequelize.INTEGER,
@@ -36,24 +36,28 @@ module.exports = {
                 },
                 onUpdate: 'CASCADE',
                 onDelete: 'SET NULL',
-                allowNull: true,
+                allowNull: false,
             },
             visity_id: {
                 type: Sequelize.STRING,
+                allowNull: false,
             },
             bill_id: {
                 type: Sequelize.STRING,
+                allowNull: false,
             },
             bill_type: {
                 type: Sequelize.ENUM('HOSPITALAR', 'AMBULATORIAL'),
+                allowNull: false,
             },
             total_amount: {
                 type: Sequelize.FLOAT,
+                allowNull: false,
             },
             number_of_pendencies: Sequelize.INTEGER,
             number_of_open_pendencies: Sequelize.INTEGER,
             number_of_documents: Sequelize.INTEGER,
-            number_of_not_recieved_documents: Sequelize.INTEGER,
+            number_of_not_received_documents: Sequelize.INTEGER,
             number_of_checklist_items: Sequelize.INTEGER,
             number_of_done_checklist_items: Sequelize.INTEGER,
             // pageInfo will be a virtual field

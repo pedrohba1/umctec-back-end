@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { Op, Sequelize } from 'sequelize';
 import Patient from '../models/Patient';
 import Insurance from '../models/Insurance';
 
@@ -9,62 +10,100 @@ import getSlaStatus from '../utils/getSlaStatus';
 class CardController {
     async store(req, res) {
         const schema = Yup.object().shape({
-            activity_id: Yup.number()
+            activityId: Yup.number()
                 .required()
                 .positive()
                 .moreThan(0),
-            patient_name: Yup.string().required(),
-            insurance_name: Yup.string().required(),
-            visity_id: Yup.string().required(),
-            bill_id: Yup.string().required(),
-            bill_type: Yup.string().oneOf(['HOSPITALAR', 'AMBULATORIAL']),
-            total_amount: Yup.number().required(),
-            number_of_pendencies: Yup.number().required(),
-            number_of_open_pendencies: Yup.number().required(),
-            number_of_documents: Yup.number().required(),
-            number_of_not_recieved_documents: Yup.number().required(),
-            number_of_checklist_items: Yup.number().required(),
-            number_of_done_checklist_items: Yup.number().required(),
+            patientName: Yup.string().required(),
+            insuranceName: Yup.string().required(),
+            visityId: Yup.string().required(),
+            billId: Yup.string().required(),
+            bilType: Yup.string().oneOf(['HOSPITALAR', 'AMBULATORIAL']),
+            totalAmount: Yup.number().required(),
+            numberOfPendencies: Yup.number().required(),
+            numberOfOpenPendencies: Yup.number().required(),
+            numberOfDocuments: Yup.number().required(),
+            numberOfNotReceivedDocuments: Yup.number().required(),
+            numberOfChecklistItems: Yup.number().required(),
+            numberOfDoneChecklistItems: Yup.number().required(),
         });
         await schema.validate(req.body);
 
         try {
-            const { patient_name, insurance_name, ...rest } = req.body;
-            const patient = await Patient.create({ name: patient_name });
+            const {
+                patientName,
+                insuranceName,
+                activityId,
+                ...rest
+            } = req.body;
+            const patient = await Patient.create({ name: patientName });
             const insurance = await Insurance.create({
-                name: insurance_name,
+                name: insuranceName,
             });
 
             const card = await Card.create({
-                patient_id: patient.id,
-                insurance_id: insurance.id,
+                activityId,
+                patientId: patient.id,
+                insuranceId: insurance.id,
                 ...rest,
             });
 
             return res.json({ patient, insurance, card });
         } catch (e) {
-            return res.json(...e);
+            return res.status(400).json(e);
         }
     }
 
     async index(req, res) {
         const { activityId } = req.params;
-        const {
-            priority,
-            toRecieve,
-            toSend,
-            page = 1,
-            perPage = 12,
-        } = req.query;
+        const { filter, page = 1, perPage = 12 } = req.query;
+
+        const validFilter = [
+            'TO_SEND',
+            'PRIORITY',
+            'TO_RECEIVE',
+            undefined,
+            '',
+        ].some(filterType => filterType === filter);
+
+        if (!validFilter)
+            return res.status(400).json({ message: 'invalid filter' });
+
+        let whereStatement = {};
+        switch (filter) {
+            case 'TO_RECEIVE':
+                whereStatement = {
+                    activityId,
+                    numberOfNotReceivedDocuments: { [Op.gt]: 0 },
+                };
+                break;
+            case 'TO_SEND':
+                whereStatement = {
+                    activityId,
+                    [Op.and]: [
+                        { numberOfNotReceivedDocuments: { [Op.eq]: 0 } },
+                        {
+                            numberOfChecklistItems: {
+                                [Op.eq]: Sequelize.col(
+                                    'number_of_done_checklist_items'
+                                ),
+                            },
+                        },
+                    ],
+                };
+                break;
+            default:
+                whereStatement = { activityId };
+                break;
+        }
 
         const cards = await Card.findAll({
             offset: (page - 1) * perPage,
+            limit: perPage,
             attributes: {
                 exclude: ['patient_id', 'insurance_id'],
             },
-            where: {
-                activity_id: activityId,
-            },
+            where: whereStatement,
             include: [
                 {
                     model: Patient,
@@ -89,8 +128,8 @@ class CardController {
         return res.json({
             cards: parsedCards,
             pageInfo: {
-                page,
-                perPage,
+                page: Number(page),
+                perPage: Number(perPage),
             },
         });
     }
