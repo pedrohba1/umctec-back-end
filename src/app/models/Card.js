@@ -5,14 +5,17 @@ class Card extends Model {
     static init(sequelize) {
         super.init(
             {
-                visity_id: {
+                visityId: {
                     type: Sequelize.STRING,
+                    field: 'visity_id',
                 },
-                bill_id: {
+                billId: {
                     type: Sequelize.STRING,
+                    field: 'bill_id',
                 },
-                bill_type: {
+                billType: {
                     type: Sequelize.ENUM('HOSPITALAR', 'AMBULATORIAL'),
+                    field: 'bill_type',
                 },
                 daysSinceCreated: {
                     type: DataTypes.VIRTUAL,
@@ -23,12 +26,30 @@ class Card extends Model {
                 total_amount: {
                     type: Sequelize.FLOAT,
                 },
-                number_of_pendencies: Sequelize.INTEGER,
-                number_of_open_pendencies: Sequelize.INTEGER,
-                number_of_documents: Sequelize.INTEGER,
-                number_of_not_recieved_documents: Sequelize.INTEGER,
-                number_of_checklist_items: Sequelize.INTEGER,
-                number_of_done_checklist_items: Sequelize.INTEGER,
+                numberOfPendencies: {
+                    type: Sequelize.INTEGER,
+                    field: 'number_of_pendencies',
+                },
+                numberOfOpenPendencies: {
+                    type: Sequelize.INTEGER,
+                    field: 'number_of_open_pendencies',
+                },
+                numberOfDocuments: {
+                    type: Sequelize.INTEGER,
+                    field: 'number_of_documents',
+                },
+                numberOfNotRecievedDocuments: {
+                    type: Sequelize.INTEGER,
+                    field: 'number_of_not_recieved_documents',
+                },
+                numberOfChecklistItems: {
+                    type: Sequelize.INTEGER,
+                    field: 'number_of_checklist_items',
+                },
+                numberOfDoneChecklistItems: {
+                    type: Sequelize.INTEGER,
+                    field: 'number_of_done_checklist_items',
+                },
             },
             { sequelize, tableName: 'cards' }
         );
