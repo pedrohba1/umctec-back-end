@@ -16,7 +16,7 @@ class CardController {
                 .moreThan(0),
             patientName: Yup.string().required(),
             insuranceName: Yup.string().required(),
-            visityId: Yup.string().required(),
+            visitId: Yup.string().required(),
             billId: Yup.string().required(),
             bilType: Yup.string().oneOf(['HOSPITALAR', 'AMBULATORIAL']),
             totalAmount: Yup.number().required(),
