@@ -89,6 +89,7 @@ class CardController {
                                 ),
                             },
                         },
+                        { numberOfOpenPendencies: { [Op.eq]: 0 } },
                     ],
                 };
                 break;
