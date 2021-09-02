@@ -8,7 +8,10 @@ module.exports = {
                 primaryKey: true,
             },
             title: Sequelize.STRING,
-            subtitle: Sequelize.STRING,
+            subtitle: {
+                type: Sequelize.STRING,
+                allowNull: true,
+            },
             sla: Sequelize.INTEGER, // postgreSQL couldn't use UNSIGNED, unfortunately. :(
             created_at: {
                 type: Sequelize.DATE,
