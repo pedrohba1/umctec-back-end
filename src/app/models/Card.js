@@ -5,9 +5,9 @@ class Card extends Model {
     static init(sequelize) {
         super.init(
             {
-                visityId: {
+                visitId: {
                     type: Sequelize.STRING,
-                    field: 'visity_id',
+                    field: 'visit_id',
                 },
                 billId: {
                     type: Sequelize.STRING,

@@ -32,7 +32,8 @@ Keep in mind that the `DB_NAME` will be the same as `DB_USER` if you don't speci
 - [X] Seed activities via Sequelize.
 - [X] POST - Create card
 - [X] GET - List cards
-- [ ] Seed Cards via Sequelize.
+- [ ] Seed Cards via Sequelize. In the front-end repository of the test, there is a json that contains mocked data.
+
 
 2. Implement bonuses:
 - [ ] Swagger

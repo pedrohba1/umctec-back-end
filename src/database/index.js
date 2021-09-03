@@ -6,9 +6,8 @@ import Activity from '../app/models/Activity';
 import Insurance from '../app/models/Insurance';
 import Patient from '../app/models/Patient';
 import Card from '../app/models/Card';
-import CardSummary from '../app/models/CardSummary';
 
-const models = [Activity, Insurance, Patient, Card, CardSummary];
+const models = [Activity, Insurance, Patient, Card];
 
 class Database {
     constructor() {

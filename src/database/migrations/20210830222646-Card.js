@@ -38,7 +38,7 @@ module.exports = {
                 onDelete: 'SET NULL',
                 allowNull: false,
             },
-            visity_id: {
+            visit_id: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },

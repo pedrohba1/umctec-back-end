@@ -17,7 +17,6 @@ class Activity extends Model {
         this.hasMany(models.Card, {
             foreignKey: 'activityId',
         });
-        this.hasOne(models.CardSummary);
     }
 }
 
