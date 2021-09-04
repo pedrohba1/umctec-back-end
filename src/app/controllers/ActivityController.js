@@ -18,14 +18,19 @@ class ActivityController {
 
     async index(req, res) {
         const schema = Yup.object().shape({
-            offset: Yup.number()
+            page: Yup.number()
+                .positive()
+                .moreThan(0),
+
+            pageSize: Yup.number()
                 .positive()
                 .moreThan(0),
         });
         await schema.validate(req.query);
-        const { page = 1 } = req.query;
+        const { page = 1, pageSize = 10 } = req.query;
         return res.json(
             await Activity.findAll({
+                limit: pageSize,
                 offset: (page - 1) * 20,
             })
         );
