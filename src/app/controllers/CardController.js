@@ -1,11 +1,14 @@
 import * as Yup from 'yup';
 import { Op, Sequelize } from 'sequelize';
+
 import Patient from '../models/Patient';
 import Insurance from '../models/Insurance';
 
 import Card from '../models/Card';
 import Activity from '../models/Activity';
+import Bill from '../models/Bill';
 import getSlaStatus from '../utils/getSlaStatus';
+import database from '../../database/index';
 
 class CardController {
     async store(req, res) {
@@ -17,8 +20,13 @@ class CardController {
             patientName: Yup.string().required(),
             insuranceName: Yup.string().required(),
             visitId: Yup.string().required(),
-            billId: Yup.string().required(),
-            bilType: Yup.string().oneOf(['HOSPITALAR', 'AMBULATORIAL']),
+            bill: Yup.object().shape({
+                account: Yup.string().required(),
+                attendance: Yup.string().required(),
+                shipping: Yup.string().required(),
+                batch: Yup.string().required(),
+                bilType: Yup.string().oneOf(['HOSPITALAR', 'AMBULATORIAL']),
+            }),
             totalAmount: Yup.number().required(),
             numberOfPendencies: Yup.number().required(),
             numberOfOpenPendencies: Yup.number().required(),
@@ -28,28 +36,43 @@ class CardController {
             numberOfDoneChecklistItems: Yup.number().required(),
         });
         await schema.validate(req.body);
+        const t = await database.connection.transaction();
 
         try {
             const {
                 patientName,
                 insuranceName,
+                bill,
                 activityId,
                 ...rest
             } = req.body;
-            const patient = await Patient.create({ name: patientName });
-            const insurance = await Insurance.create({
-                name: insuranceName,
-            });
-
-            const card = await Card.create({
-                activityId,
-                patientId: patient.id,
-                insuranceId: insurance.id,
-                ...rest,
-            });
-
+            const patient = await Patient.create(
+                { name: patientName },
+                { transaction: t }
+            );
+            const insurance = await Insurance.create(
+                {
+                    name: insuranceName,
+                },
+                { transaction: t }
+            );
+            const createdBill = await Bill.create(bill, { transaction: t });
+            const card = await Card.create(
+                {
+                    activityId,
+                    patientId: patient.id,
+                    insuranceId: insurance.id,
+                    billId: createdBill.id,
+                    ...rest,
+                },
+                {
+                    transaction: t,
+                }
+            );
+            await t.commit();
             return res.json({ patient, insurance, card });
         } catch (e) {
+            await t.rollback();
             return res.status(400).json(e);
         }
     }
@@ -113,6 +136,10 @@ class CardController {
                 {
                     model: Insurance,
                     as: 'insurance',
+                },
+                {
+                    model: Bill,
+                    as: 'bill',
                 },
             ],
         });
