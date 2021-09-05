@@ -1,6 +1,6 @@
 module.exports = {
-    up: queryInterface => {
-        return queryInterface.bulkInsert(
+    up: async queryInterface => {
+        const insert = queryInterface.bulkInsert(
             'cards',
             [
                 {
@@ -9,8 +9,7 @@ module.exports = {
                     patient_id: 1,
                     insurance_id: 1,
                     visit_id: '13451',
-                    bill_id: '34902',
-                    bill_type: 'HOSPITALAR',
+                    bill_id: 1,
                     total_amount: 1502.1,
                     number_of_pendencies: 2,
                     number_of_open_pendencies: 0,
@@ -27,8 +26,7 @@ module.exports = {
                     patient_id: 2,
                     insurance_id: 2,
                     visit_id: '13451',
-                    bill_id: '34902',
-                    bill_type: 'HOSPITALAR',
+                    bill_id: 2,
                     total_amount: 500.5,
                     number_of_pendencies: 2,
                     number_of_open_pendencies: 0,
@@ -45,8 +43,7 @@ module.exports = {
                     patient_id: 3,
                     insurance_id: 2,
                     visit_id: '13451',
-                    bill_id: '34902',
-                    bill_type: 'HOSPITALAR',
+                    bill_id: 3,
                     total_amount: 299.5,
                     number_of_pendencies: 2,
                     number_of_open_pendencies: 0,
@@ -60,6 +57,11 @@ module.exports = {
             ],
             {}
         );
+
+        await queryInterface.sequelize.query(
+            `ALTER SEQUENCE "cards_id_seq" RESTART WITH ${4}`
+        );
+        return insert;
     },
 
     down: queryInterface => {

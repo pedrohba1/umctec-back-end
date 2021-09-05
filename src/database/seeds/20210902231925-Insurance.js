@@ -1,6 +1,6 @@
 module.exports = {
-    up: queryInterface => {
-        return queryInterface.bulkInsert(
+    up: async queryInterface => {
+        const insert = queryInterface.bulkInsert(
             'insurances',
             [
                 {
@@ -36,6 +36,10 @@ module.exports = {
             ],
             {}
         );
+        await queryInterface.sequelize.query(
+            `ALTER SEQUENCE "insurances_id_seq" RESTART WITH ${6}`
+        );
+        return insert;
     },
 
     down: queryInterface => {

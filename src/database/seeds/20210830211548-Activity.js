@@ -1,6 +1,6 @@
 module.exports = {
-    up: queryInterface => {
-        return queryInterface.bulkInsert(
+    up: async queryInterface => {
+        const insert = queryInterface.bulkInsert(
             'activities',
             [
                 {
@@ -30,6 +30,11 @@ module.exports = {
             ],
             {}
         );
+
+        await queryInterface.sequelize.query(
+            `ALTER SEQUENCE "activities_id_seq" RESTART WITH ${4}`
+        );
+        return insert;
     },
 
     down: queryInterface => {
