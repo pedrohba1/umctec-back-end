@@ -48,6 +48,7 @@ module.exports = {
                     model: 'bills',
                     key: 'id',
                 },
+                unique: true,
                 onUpdate: 'CASCADE',
                 onDelete: 'SET NULL',
                 allowNull: false,

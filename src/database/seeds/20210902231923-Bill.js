@@ -64,8 +64,38 @@ module.exports = {
                     updated_at: new Date(),
                 },
                 {
-                    id: 8,
+                    id: 7,
                     account: '312331209',
+                    attendance: '604391201',
+                    shipping: '8931209',
+                    batch: '90318230',
+                    bill_type: 'HOSPITALAR',
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                },
+                {
+                    id: 8,
+                    account: '1213091209',
+                    attendance: '604391201',
+                    shipping: '8931209',
+                    batch: '90318230',
+                    bill_type: 'HOSPITALAR',
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                },
+                {
+                    id: 9,
+                    account: '1213091209',
+                    attendance: '604391201',
+                    shipping: '8931209',
+                    batch: '90318230',
+                    bill_type: 'HOSPITALAR',
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                },
+                {
+                    id: 10,
+                    account: '1213091209',
                     attendance: '604391201',
                     shipping: '8931209',
                     batch: '90318230',
@@ -77,7 +107,7 @@ module.exports = {
             {}
         );
         await queryInterface.sequelize.query(
-            `ALTER SEQUENCE "bills_id_seq" RESTART WITH ${9}`
+            `ALTER SEQUENCE "bills_id_seq" RESTART WITH ${12}`
         );
         return insert;
     },
