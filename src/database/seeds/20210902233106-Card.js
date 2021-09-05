@@ -163,7 +163,7 @@ module.exports = {
         );
 
         await queryInterface.sequelize.query(
-            `ALTER SEQUENCE "cards_id_seq" RESTART WITH ${1}`
+            `ALTER SEQUENCE "cards_id_seq" RESTART WITH ${10}`
         );
         return insert;
     },

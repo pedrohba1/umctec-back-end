@@ -107,7 +107,7 @@ module.exports = {
             {}
         );
         await queryInterface.sequelize.query(
-            `ALTER SEQUENCE "bills_id_seq" RESTART WITH ${12}`
+            `ALTER SEQUENCE "bills_id_seq" RESTART WITH ${11}`
         );
         return insert;
     },
