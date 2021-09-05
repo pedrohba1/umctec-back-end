@@ -9,14 +9,6 @@ class Card extends Model {
                     type: Sequelize.STRING,
                     field: 'visit_id',
                 },
-                billId: {
-                    type: Sequelize.STRING,
-                    field: 'bill_id',
-                },
-                billType: {
-                    type: Sequelize.ENUM('HOSPITALAR', 'AMBULATORIAL'),
-                    field: 'bill_type',
-                },
                 daysSinceCreated: {
                     type: DataTypes.VIRTUAL,
                     get() {
@@ -65,6 +57,10 @@ class Card extends Model {
         this.belongsTo(models.Patient, {
             foreignKey: 'patientId',
             as: 'patient',
+        });
+        this.belongsTo(models.Bill, {
+            foreignKey: 'billId',
+            as: 'bill',
         });
     }
 }
