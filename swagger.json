@@ -1,0 +1,339 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Documentation for the UMCTEC back-end test",
+        "version": "1.0.0",
+        "title": "Swagger PEG Contas",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "petstore.swagger.io",
+    "basePath": "/v2",
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/cards": {
+            "post": {
+                "summary": "Creates a new card",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Activity data to be stored",
+                    "required": true,
+                    "schema": {
+                        "example": {
+                            "activityId": 1,
+                            "patientName": "pedro bufulin",
+                            "insuranceName": "seguros de saúde tal",
+                            "visitId": "120342190",
+                            "totalAmount": 10,
+                            "numberOfPendencies": 2,
+                            "numberOfOpenPendencies": 0,
+                            "numberOfDocuments": 3,
+                            "numberOfNotReceivedDocuments": 0,
+                            "numberOfChecklistItems": 4,
+                            "numberOfDoneChecklistItems": 4,
+                            "bill": {
+                                "account": "312331209",
+                                "attendance": "604391201",
+                                "shipping": "8931209",
+                                "batch": "90318230",
+                                "billType": "HOSPITALAR"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "request succeeded",
+                        "schema": {
+                            "example": {
+
+                                "patient": {
+                                    "id": 14,
+                                    "name": "pedro bufulin",
+                                    "updatedAt": "2021-09-06T03:58:36.057Z",
+                                    "createdAt": "2021-09-06T03:58:36.057Z"
+                                },
+                                "insurance": {
+                                    "id": 8,
+                                    "name": "seguros de saúde tal",
+                                    "updatedAt": "2021-09-06T03:58:36.064Z",
+                                    "createdAt": "2021-09-06T03:58:36.064Z"
+                                },
+                                "card": {
+                                    "daysSinceCreated": 0,
+                                    "id": 12,
+                                    "activityId": 1,
+                                    "patientId": 14,
+                                    "insuranceId": 8,
+                                    "billId": 13,
+                                    "visitId": "120342190",
+                                    "totalAmount": 10,
+                                    "numberOfPendencies": 2,
+                                    "numberOfOpenPendencies": 0,
+                                    "numberOfDocuments": 3,
+                                    "numberOfNotReceivedDocuments": 0,
+                                    "numberOfChecklistItems": 4,
+                                    "numberOfDoneChecklistItems": 4,
+                                    "updatedAt": "2021-09-06T03:58:36.069Z",
+                                    "createdAt": "2021-09-06T03:58:36.069Z"
+                                }
+
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "request failed"
+                    }
+                }
+            }
+        },
+
+
+        "/cards/{activityId}": {
+            "get": {
+                "summary": "Shows cards from activity passed in route param",
+                "description": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "name": "page",
+                        "in": "query",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "perPage",
+                        "in": "query",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "enum": [
+                            "TO_SEND",
+                            "TO_RECEIVE",
+                            "undefined"
+                        ]
+                    },
+                    {
+                        "in": "path",
+                        "name": "activityId",
+                        "description": "id of activity you want the cards from",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "request succeeded",
+                        "schema": {
+                            "items": {
+                                "type": "array",
+                                "example": {
+                                    "cards": [{
+                                        "daysSinceCreated": 10,
+                                        "id": 8,
+                                        "visitId": "13451312312",
+                                        "totalAmount": 299.5,
+                                        "numberOfPendencies": 2,
+                                        "numberOfOpenPendencies": 4,
+                                        "numberOfDocuments": 4,
+                                        "numberOfNotReceivedDocuments": 0,
+                                        "numberOfChecklistItems": 4,
+                                        "numberOfDoneChecklistItems": 4,
+                                        "createdAt": "2021-08-26T22:17:08.131Z",
+                                        "updatedAt": "2021-08-26T22:17:08.131Z",
+                                        "activityId": 1,
+                                        "insuranceId": 1,
+                                        "patientId": 8,
+                                        "billId": 8,
+                                        "patient": {
+                                            "id": 8,
+                                            "name": "Frances Salazar",
+                                            "createdAt": "2021-09-05T22:17:08.120Z",
+                                            "updatedAt": "2021-09-05T22:17:08.120Z"
+                                        },
+                                        "insurance": {
+                                            "id": 1,
+                                            "name": "Convênio 1",
+                                            "createdAt": "2021-09-05T22:17:08.128Z",
+                                            "updatedAt": "2021-09-05T22:17:08.128Z"
+                                        },
+                                        "bill": {
+                                            "id": 8,
+                                            "account": "1213091209",
+                                            "attendance": "604391201",
+                                            "shipping": "8931209",
+                                            "batch": "90318230",
+                                            "billType": "HOSPITALAR",
+                                            "createdAt": "2021-09-05T22:17:08.124Z",
+                                            "updatedAt": "2021-09-05T22:17:08.124Z"
+                                        },
+                                        "slaStatus": "WARNING"
+                                    }],
+                                    "pageInfo": {
+                                        "page": 1,
+                                        "perPage": 12
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Request failed"
+                    }
+                }
+            }
+        },
+
+        "/summary/{activityId}": {
+            "get": {
+                "summary": "Shows summarized data about activity's cards schedule status",
+                "description": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "path",
+                    "name": "activityId",
+                    "description": "id of activity you want the cards from",
+                    "required": true
+                }],
+                "responses": {
+                    "200": {
+                        "description": "request succeeded",
+                        "schema": {
+                            "properties": {
+                                "totalCardsOk": {
+                                    "type": "integer"
+                                },
+                                "totalCardsWarning": {
+                                    "type": "integer"
+                                },
+                                "totalCardsDelayed": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Request failed"
+                    }
+                }
+            }
+        },
+
+
+        "/activities": {
+            "post": {
+                "summary": "Creates a new activity",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Activity data to be stored",
+                    "required": true,
+                    "schema": {
+                        "properties": {
+                            "title": {
+                                "type": "string"
+                            },
+                            "subtitle": {
+                                "type": "string"
+                            },
+                            "sla": {
+                                "type": "number"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "request succeeded",
+                        "schema": {
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "title": {
+                                    "type": "string"
+                                },
+                                "subtitle": {
+                                    "type": "string"
+                                },
+                                "sla": {
+                                    "type": "integer"
+                                },
+                                "updatedAt": {
+                                    "type": "string"
+                                },
+                                "createdAt": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "request failed"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Lists current activities",
+                "description": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "request succeeded",
+                        "schema": {
+                            "items": {
+                                "type": "array",
+                                "example": {
+                                    "id": 1,
+                                    "title": "Unidade de internação I",
+                                    "subtitle": "",
+                                    "sla": 10,
+                                    "createdAt": "2021-09-05T21:12:54.465Z",
+                                    "updatedAt": "2021-09-05T21:12:54.465Z"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Request failed"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}

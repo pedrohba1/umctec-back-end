@@ -43,11 +43,14 @@ module.exports = {
                 allowNull: false,
             },
             bill_id: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-            bill_type: {
-                type: Sequelize.ENUM('HOSPITALAR', 'AMBULATORIAL'),
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'bills',
+                    key: 'id',
+                },
+                unique: true,
+                onUpdate: 'CASCADE',
+                onDelete: 'SET NULL',
                 allowNull: false,
             },
             total_amount: {
@@ -60,7 +63,6 @@ module.exports = {
             number_of_not_received_documents: Sequelize.INTEGER,
             number_of_checklist_items: Sequelize.INTEGER,
             number_of_done_checklist_items: Sequelize.INTEGER,
-            // pageInfo will be a virtual field
             created_at: {
                 type: Sequelize.DATE,
                 allowNull: false,
