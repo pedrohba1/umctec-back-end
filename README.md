@@ -36,7 +36,7 @@ Keep in mind that the `DB_NAME` will be the same as `DB_USER` if you don't speci
 
 
 2. Implement bonuses:
-- [ ] Swagger
+- [X] Swagger
 - [ ] Unit tests
 - [ ] Integration tests
 - [ ] Host REST Api in a server
