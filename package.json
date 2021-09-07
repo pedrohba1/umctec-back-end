@@ -10,7 +10,7 @@
     "commit": "cz",
     "dev": "NODE_ENV=development nodemon src/server.js",
     "build": "sucrase ./src -d ./dist --transforms imports",
-    "before:test": "NODE_ENV=test yarn sequelize db:migrate && yarn sequelize db:seed:all",
+    "before:test": "NODE_ENV=test yarn sequelize db:migrate && NODE_ENV=test yarn sequelize db:seed:all",
     "test": " yarn before:test; jest ; yarn after:test",
     "lint": "eslint src/**",
     "after:test": "NODE_ENV=test yarn sequelize db:migrate:undo:all"
