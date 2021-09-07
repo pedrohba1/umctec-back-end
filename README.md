@@ -53,7 +53,7 @@ The tests are using the seeds. If the seeding script does not run for some reaso
 2. Implement bonuses:
 - [X] Swagger
 - [ ] Unit tests
-- [ ] Integration tests
+- [X] Integration tests
 - [ ] Host REST Api in a server
 
 
