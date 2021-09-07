@@ -8,12 +8,12 @@
   },
   "scripts": {
     "commit": "cz",
-    "dev": "nodemon src/server.js",
+    "dev": "NODE_ENV=development nodemon src/server.js",
     "build": "sucrase ./src -d ./dist --transforms imports",
-    "pretest": "set NODE_ENV=test && yarn sequelize db:migrate",
+    "pretest": "NODE_ENV=test yarn sequelize db:migrate",
     "test": "jest",
     "lint": "eslint src/**",
-    "posttest": "set NODE_ENV=test  && yarn sequelize db:migrate:undo:all"
+    "posttest": "NODE_ENV=test yarn sequelize db:migrate:undo:all"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
