@@ -12,4 +12,15 @@ describe('Activity', () => {
         expect(response.body).toHaveProperty('id');
         done();
     });
+
+    it('should be able to list activities', async done => {
+        const response = await request(app)
+            .get('/activities')
+            .query({
+                page: 1,
+            })
+            .send();
+        expect(response.status).toBe(200);
+        done();
+    });
 });
