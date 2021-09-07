@@ -27,7 +27,7 @@ Keep in mind that the `DB_NAME` will be the same as `DB_USER` if you don't speci
 
 When running this API locally, be sure to fill `.env` and `.env.dev` with the same variables. This is because running sequelize commands on terminal wil also launch `bootstrap.js` to get variables and they will be get from `.env` while your database connections when running the API will come from `.env.dev`.
 
-## 🏁 Testing <a name = "tests"></a>
+## Testing <a name = "tests"></a>
 
 To execute tests, you need to create a testing database:
 
