@@ -13,6 +13,16 @@ describe('Activity', () => {
         done();
     });
 
+    it('should fail creation because fields are invalid', async done => {
+        const response = await request(app)
+            .post('/activities')
+            .send({
+                any: 'inavlid field',
+            });
+        expect(response.status).toBe(500);
+        done();
+    });
+
     it('should be able to list activities', async done => {
         const response = await request(app)
             .get('/activities')
