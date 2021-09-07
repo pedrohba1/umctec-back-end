@@ -37,6 +37,8 @@ docker run --name test -e  POSTGRES_USER=test -e POSTGRES_PASSWORD=admin -p 5434
 
 After that, copy the contents of `.env.example` into `.env.test` and insert the variables accordingly  The test scripts in the `package.json` file will handle migrations, don't worry.
 
+The tests are using the seeds. If the seeding script does not run for some reason, tests will mostly fail.
+
 ## Roadmap <a name = "roadmap"></a>
 
 1. make the endpoints and all code related to storing and fetching them from the database:
