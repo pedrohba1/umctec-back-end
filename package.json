@@ -10,10 +10,10 @@
     "commit": "cz",
     "dev": "NODE_ENV=development nodemon src/server.js",
     "build": "sucrase ./src -d ./dist --transforms imports",
-    "pretest": "NODE_ENV=test yarn sequelize db:migrate",
-    "test": "jest",
+    "before:test": "NODE_ENV=test yarn sequelize db:migrate && yarn sequelize db:seed:all",
+    "test": " yarn before:test; jest ; yarn after:test",
     "lint": "eslint src/**",
-    "posttest": "NODE_ENV=test yarn sequelize db:migrate:undo:all"
+    "after:test": "NODE_ENV=test yarn sequelize db:migrate:undo:all"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
