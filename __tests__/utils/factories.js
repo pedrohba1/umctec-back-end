@@ -1,12 +1,12 @@
 import faker from 'faker';
 import { factory } from 'factory-girl';
 
-import User from '../../src/app/models/User';
+import Activity from '../../src/app/models/Activity';
 
-factory.define('User', User, {
-  name: faker.name.findName(),
-  email: faker.internet.email(),
-  password: faker.internet.password(),
+factory.define('Activity', Activity, {
+    title: faker.lorem.lines(2),
+    subtitle: faker.lorem.lines(3),
+    sla: faker.random.number({ min: 10, max: 30 }),
 });
 
 export default factory;

@@ -4,6 +4,7 @@
 
 - [About](#about)
 - [Setup](#getting_started)
+- [Testing](#tests)
 - [Roadmap](#roadmap)
 
 
@@ -20,9 +21,23 @@ To run this backend you simply need to create a docker container with the follow
 docker run --name umctec -e  POSTGRES_USER=umctec -e POSTGRES_PASSWORD=admin -p 5433:5432 -d postgres
 ```
 
-After that, copy the contents of `.env.development` into `.env` and run the migrations with: `yarn sequelize db:migrate`.
+After that, copy the contents of `.env.dev` into `.env`, insert the correct variable names and run the migrations with: `yarn sequelize db:migrate`.
 
 Keep in mind that the `DB_NAME` will be the same as `DB_USER` if you don't specify it in container creation command above.
+
+When running this API locally, be sure to fill `.env` and `.env.dev` with the same variables. This is because running sequelize commands on terminal wil also launch `bootstrap.js` to get variables and they will be get from `.env` while your database connections when running the API will come from `.env.dev`.
+
+## 🏁 Testing <a name = "tests"></a>
+
+To execute tests, you need to create a testing database:
+
+```
+docker run --name test -e  POSTGRES_USER=test -e POSTGRES_PASSWORD=admin -p 5434:5432 -d postgres
+```
+
+After that, copy the contents of `.env.example` into `.env.test` and insert the variables accordingly  The test scripts in the `package.json` file will handle migrations, don't worry.
+
+The tests are using the seeds. If the seeding script does not run for some reason, tests will mostly fail.
 
 ## Roadmap <a name = "roadmap"></a>
 
