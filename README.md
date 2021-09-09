@@ -21,7 +21,7 @@ To run this backend you simply need to create a docker container with the follow
 docker run --name umctec -e  POSTGRES_USER=umctec -e POSTGRES_PASSWORD=admin -p 5433:5432 -d postgres
 ```
 
-After that, copy the contents of `.env.dev` into `.env`, insert the correct variable names and run the migrations with: `yarn sequelize db:migrate`.
+After that, copy the contents of `.env.dev` into `.env`, insert the correct variable names and run the migrations with: `yarn sequelize db:migrate`. After running the migrations, run the seeds with: `yarn sequelize db:seed:all`.
 
 Keep in mind that the `DB_NAME` will be the same as `DB_USER` if you don't specify it in container creation command above.
 
